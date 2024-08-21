@@ -1,0 +1,282 @@
+/* write css here */
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  background-color: #f3f3f3;
+
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.container {
+  margin: 4rem 0;
+  flex: 0 1 110rem;
+  min-height: 80vh;
+  background-color: #fff;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  background-color: #555;
+  background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
+  text-align: center;
+  color: #f7f7f7;
+  padding: 1rem;
+}
+.heading {
+  font-size: 3.6rem;
+  font-weight: 600;
+}
+
+.app {
+  padding: 3rem 5rem 5rem;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  align-items: end;
+  gap: 1.2rem;
+}
+.form--expense {
+  margin-bottom: 4rem;
+}
+
+.form__field {
+  flex: 0 0 19%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.form__label {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+.form__input {
+  padding: 0.8rem 1.6rem;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  color: inherit;
+  font-size: inherit;
+}
+.form--expense .form__input {
+  width: 100%;
+}
+.form__input::placeholder {
+  color: #777;
+}
+.form__input:focus {
+  outline-color: #406efd;
+}
+
+.form--category {
+  /* justify-content: end; */
+  margin-bottom: 1rem;
+}
+
+.btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #f7f7f7;
+  /* background-image: linear-gradient(to right bottom, #2998ff, #5643fa); */
+  background-color: #406efd;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn--add {
+  flex: 0 0 fit-content;
+  padding: 1rem 2rem;
+  margin-left: auto;
+}
+.btn--delete {
+  padding: 0.4rem 0.8rem;
+}
+.btn:hover {
+  background-color: #5643fa;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+.btn:focus {
+  outline: none;
+  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
+}
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  /* table-layout: fixed; */
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #bbb;
+}
+.thead {
+  background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
+  color: #f7f7f7;
+}
+.thead th {
+  font-weight: 500;
+}
+.table th,
+.table td {
+  font-size: inherit;
+  text-align: left;
+  border: 1px solid #bbb;
+  padding: 0.6rem 1.4rem;
+}
+.table th:first-child,
+.table th:nth-child(2) {
+  width: 25%;
+}
+.table th:nth-child(3),
+.table th:nth-child(4) {
+  width: 20%;
+}
+.table th:last-child {
+  width: 10%;
+}
+.tfoot {
+  font-weight: 500;
+}
+.total-expense {
+  display: inline-block;
+}
+
+@media only screen and (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media only screen and (max-width: 64em) {
+  html {
+    font-size: 50%;
+  }
+  .container {
+    flex: 0 0 100%;
+    margin: 0;
+    min-height: 100vh;
+  }
+  .app {
+    padding: 2rem 3rem 3rem;
+  }
+  .form__field {
+    flex: 0 0 20%;
+  }
+}
+@media only screen and (max-width: 52em) {
+  .heading {
+    font-size: 3rem;
+  }
+
+  .form--expense {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+  }
+  .form__field {
+    grid-column: span 3;
+  }
+  .form__field:nth-child(3),
+  .form__field:nth-child(4) {
+    grid-column: span 2;
+  }
+  .btn--add {
+    margin-left: 0;
+    grid-column: -3/ -1;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.4rem 1rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .heading {
+    font-size: 2.4rem;
+  }
+
+  .form--expense {
+    gap: 1.6rem;
+  }
+  .form__field,
+  .form__field:nth-child(3),
+  .form__field:nth-child(4),
+  .btn--add {
+    grid-column: 1/-1;
+  }
+
+  .table th:first-child,
+  .table th:nth-child(2),
+  .table th:nth-child(3) {
+    width: 26%;
+  }
+  .table th:nth-child(4) {
+    width: 12%;
+  }
+  .table th:last-child {
+    width: 10%;
+  }
+}
+@media only screen and (max-width: 31em) {
+  .app {
+    padding: 1.2rem 2rem 2rem;
+  }
+
+  .form--expense {
+    gap: 1.2rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .table {
+    font-size: 1.2rem;
+  }
+  .btn--delete {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 24em) {
+  .table {
+    font-size: 1rem;
+  }
+  .btn--delete {
+    font-size: 0.8rem;
+  }
+}
+@media only screen and (min-width: 112.5em) {
+  html {
+    font-size: 75%;
+  }
+  .container {
+    flex: 0 1 135rem;
+  }
+  .form--expense {
+    gap: 2rem;
+  }
+  .form__field {
+    flex: 0 0 20%;
+  }
+}
