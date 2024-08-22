@@ -81,15 +81,26 @@ body {
 .form--expense .form__input {
   width: 100%;
 }
-.form__input::placeholder {
+.form__input::placeholder,
+.form__input--date:invalid,
+.form__input--category:has(option[value='']:checked),
+.form__input.form__input--category option[value=''] {
   color: #777;
+}
+.form__input--date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+.form__input--amount::-webkit-inner-spin-button {
+  display: none;
+}
+.form__input option {
+  color: #333;
 }
 .form__input:focus {
   outline-color: #406efd;
 }
 
 .form--category {
-  /* justify-content: end; */
   margin-bottom: 1rem;
 }
 
@@ -98,7 +109,6 @@ body {
   font-weight: 500;
   font-size: 1.4rem;
   color: #f7f7f7;
-  /* background-image: linear-gradient(to right bottom, #2998ff, #5643fa); */
   background-color: #406efd;
   border: none;
   border-radius: 3px;
@@ -134,19 +144,11 @@ body {
   border-collapse: collapse;
   border: 1px solid #bbb;
 }
-.thead {
-  background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
+.table .thead th {
+  text-align: center;
   color: #f7f7f7;
-}
-.thead th {
+  background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
   font-weight: 500;
-}
-.table th,
-.table td {
-  font-size: inherit;
-  text-align: left;
-  border: 1px solid #bbb;
-  padding: 0.6rem 1.4rem;
 }
 .table th:first-child,
 .table th:nth-child(2) {
@@ -158,6 +160,13 @@ body {
 }
 .table th:last-child {
   width: 10%;
+}
+.table th,
+.table td {
+  font-size: inherit;
+  text-align: left;
+  border: 1px solid #bbb;
+  padding: 0.6rem 1.4rem;
 }
 .tfoot {
   font-weight: 500;

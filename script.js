@@ -12,12 +12,28 @@ const totalExpense = document.querySelector('.total-expense');
 
 const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-let cat = filterCategory.value;
-
 // Functions
+const formatAmount = amount =>
+  new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+  }).format(amount);
+
+const formatDate = date =>
+  new Intl.DateTimeFormat('en-IN', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).format(new Date(date));
+
+const saveExpenses = function () {
+  localStorage.setItem('expenses', JSON.stringify(expenses));
+};
+
 const updateTable = function () {
-  const entries =
-    cat === 'all' ? expenses : expenses.filter(e => e.category === cat);
+  const entries = !filterCategory.value
+    ? expenses
+    : expenses.filter(e => e.category === filterCategory.value);
 
   while (table.rows.length > 0) {
     table.deleteRow(0);
@@ -27,25 +43,18 @@ const updateTable = function () {
     const row = table.insertRow();
 
     row.insertCell(0).textContent = expense.name;
-    row.insertCell(1).textContent = expense.amount;
-    row.insertCell(2).textContent = expense.date;
+    row.insertCell(1).textContent = formatAmount(expense.amount);
+    row.insertCell(2).textContent = formatDate(expense.date);
     row.insertCell(3).textContent = expense.category;
     row.insertCell(
       4
     ).innerHTML = `<button class="btn btn--delete" data-index=${i}>Delete</button>`;
   });
 
-  const total = entries.reduce(
-    (acc, e) => (acc += Number.parseInt(e.amount)),
-    0
-  );
-  totalExpense.textContent = total;
+  const total = entries.reduce((acc, e) => (acc += +e.amount), 0);
+  totalExpense.textContent = formatAmount(total);
 };
 updateTable();
-
-const saveExpenses = function () {
-  localStorage.setItem('expenses', JSON.stringify(expenses));
-};
 
 const addExpense = function (e) {
   e.preventDefault();
@@ -61,7 +70,7 @@ const addExpense = function (e) {
     saveExpenses();
     updateTable();
 
-    btnAdd.blur();
+    this.blur();
     expenseName.value = '';
     amount.value = '';
     date.value = '';
@@ -75,7 +84,6 @@ const deleteExpense = function (e) {
   if (!btn) return;
 
   expenses.splice(btn.dataset.index, 1);
-
   saveExpenses();
   updateTable();
 };
@@ -84,8 +92,8 @@ const deleteExpense = function (e) {
 btnAdd.addEventListener('click', addExpense);
 table.addEventListener('click', deleteExpense);
 
-filterCategory.addEventListener('change', function () {
-  cat = this.value;
+filterCategory.addEventListener('change', function (e) {
+  e.preventDefault();
   updateTable();
   this.blur();
 });
