@@ -90,6 +90,9 @@ body {
 .form__input--date::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
+.form__input--date::-webkit-calendar-picker-indicator:focus {
+  outline-color: #406efd;
+}
 .form__input--amount::-webkit-inner-spin-button {
   display: none;
 }
@@ -98,6 +101,18 @@ body {
 }
 .form__input:focus {
   outline-color: #406efd;
+}
+
+.form--expense .form__field {
+  position: relative;
+}
+.form--expense .form__field::after {
+  content: attr(data-err);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: red;
+  font-size: 1.2rem;
 }
 
 .form--category {
@@ -124,14 +139,12 @@ body {
 .btn--delete {
   padding: 0.4rem 0.8rem;
 }
-.btn:hover {
+.btn:hover,
+.btn:focus {
+  outline: transparent;
   background-color: #5643fa;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
-}
-.btn:focus {
-  outline: none;
-  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
 }
 .btn:active {
   transform: translateY(0);
@@ -149,6 +162,12 @@ body {
   color: #f7f7f7;
   background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
   font-weight: 500;
+}
+.table,
+.tbody,
+tr,
+td {
+  transition: all 0.2s;
 }
 .table th:first-child,
 .table th:nth-child(2) {
@@ -204,7 +223,8 @@ body {
   .form--expense {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 2rem;
+    column-gap: 2rem;
+    row-gap: 3.2rem;
   }
   .form__field {
     grid-column: span 3;
@@ -224,13 +244,17 @@ body {
   }
 }
 @media only screen and (max-width: 37.5em) {
+  .app {
+    padding: 2rem 0.5rem 3rem;
+  }
+  .app > * {
+    padding: 0 2.5rem;
+  }
+
   .heading {
     font-size: 2.4rem;
   }
 
-  .form--expense {
-    gap: 1.6rem;
-  }
   .form__field,
   .form__field:nth-child(3),
   .form__field:nth-child(4),
@@ -252,11 +276,13 @@ body {
 }
 @media only screen and (max-width: 31em) {
   .app {
-    padding: 1.2rem 2rem 2rem;
+    padding: 1.2rem 0.5rem 2rem;
+  }
+  .app > * {
+    padding: 0 1.5rem;
   }
 
   .form--expense {
-    gap: 1.2rem;
     margin-bottom: 2.4rem;
   }
 

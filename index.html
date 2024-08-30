@@ -22,7 +22,7 @@
       </header>
       <main class="app">
         <form class="form form--expense">
-          <div class="form__field">
+          <div class="form__field" data-err="">
             <label for="expense-name" class="form__label"
               >Expense name :
             </label>
@@ -33,7 +33,7 @@
               placeholder="Expense name"
             />
           </div>
-          <div class="form__field">
+          <div class="form__field" data-err="">
             <label for="amount" class="form__label">Amount : </label>
             <input
               type="number"
@@ -43,7 +43,7 @@
               placeholder="Amount"
             />
           </div>
-          <div class="form__field">
+          <div class="form__field" data-err="">
             <label for="date" class="form__label">Date : </label>
             <input
               type="date"
@@ -52,7 +52,7 @@
               required
             />
           </div>
-          <div class="form__field form__field--drop-down">
+          <div class="form__field form__field--drop-down" data-err="">
             <label for="category" class="form__label"
               >Expense category :
             </label>
