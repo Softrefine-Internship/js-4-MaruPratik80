@@ -54,7 +54,7 @@ const updateTable = function () {
 
   const total = expenses
     .filter(e => !filterCategory.value || e.category === filterCategory.value)
-    .reduce((acc, e) => (acc += +e.amount), 0);
+    .reduce((acc, e) => (acc += BigInt(e.amount)), 0n);
   totalExpense.textContent = formatAmount(total);
 };
 updateTable();
@@ -65,7 +65,7 @@ const addExpense = function (e) {
   if (isValidExpense()) {
     expenses.push({
       name: expenseName.value,
-      amount: amount.value,
+      amount: amount.value.split('.')[0],
       date: date.value,
       category: category.value,
     });
@@ -91,7 +91,7 @@ const deleteExpense = function (e) {
 
 // Form validation halper functions
 function isValidExpense() {
-  if (expenseName.value && amount.value > 0 && date.value && category.value)
+  if (expenseName.value && +amount.value > 0 && date.value && category.value)
     return true;
 
   inputs.forEach(input => {
@@ -111,8 +111,8 @@ function valid() {
 function validA() {
   if (!this.value) {
     this.parentElement.dataset.err = '*This field is required';
-  } else if (this.value == '0') {
-    this.parentElement.dataset.err = '*Amount should be greater than zero';
+  } else if (this.value <= '0') {
+    this.parentElement.dataset.err = '*Amount must be positive';
   } else {
     this.parentElement.dataset.err = '';
   }

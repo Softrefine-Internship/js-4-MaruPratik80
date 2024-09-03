@@ -37,7 +37,9 @@
             <label for="amount" class="form__label">Amount : </label>
             <input
               type="number"
-              step="0.01"
+              min="1"
+              step="1"
+              pattern="\d+"
               class="form__input form__input--amount"
               id="amount"
               placeholder="Amount"
